@@ -116,8 +116,8 @@
         passingElements.push(collection[i]);
       }
     }
-    return passingElements;
-  };
+      return passingElements;
+   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
@@ -225,7 +225,7 @@
 
 
 
-//STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE END OF PART 1
+//END OF PART 1
 
 
 
