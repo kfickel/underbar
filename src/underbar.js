@@ -86,16 +86,75 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    var passingElements = [];
+    for(var i = 0; i < collection.length; i++) {
+      if(test(collection[i])) {
+        passingElements.push(collection[i]);
+      }
+    }
+    return passingElements;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
+    // var passingElements = [];
+    // _.filter(collection, function(elements) {
+    //   for(var i = 0; i < collection.length; i++) {
+    //       if(collection[i] !== elements) {
+    //         passingElements.push(collection[i]);
+    //       }
+    //   }
+    // });
+    // return passingElements;
+
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+
+    var passingElements = [];
+    for (var i = 0; i < collection.length; i++) {
+      if (!test(collection[i])) {
+        passingElements.push(collection[i]);
+      }
+    }
+    return passingElements;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var obj = {};
+    var uniqueArray = [];
+    var iteratedArray = [];
+    if(isSorted === true) {
+      for(var j = 0; j < array.length; j++) {
+        if(iterator(array[j])) {
+          iteratedArray.push(array[j]);
+        }
+      }
+      if(iteratedArray.length >= 1) {
+        obj[array[0]] = array[0];
+        for(var i = 1; i < iteratedArray.length; i++) {
+          if(!obj[iteratedArray[i]]) {
+            obj[iteratedArray[i]] = iteratedArray[i];
+          }
+        }
+        for(var key in obj) {
+          uniqueArray.push(obj[key]);
+        }
+      }
+    } else if (isSorted === false) {
+      return uniqueArray;
+    } else {
+      obj[array[0]] = array[0];
+        for(var i = 1; i < array.length; i++) {
+          if(!obj[array[i]]) {
+            obj[array[i]] = array[i];
+          }
+        }
+        for(var key in obj) {
+          uniqueArray.push(obj[key]);
+        }
+    }
+    return uniqueArray;
   };
 
 
@@ -146,6 +205,13 @@
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
   };
+
+
+
+//STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE END OF PART 1
+
+
+
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
