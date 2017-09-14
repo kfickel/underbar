@@ -244,7 +244,7 @@
     return _.reduce(collection, function(wasFound, item) {
       if (wasFound) {
         return true;
-      }
+      } 
       return item === target;
     }, false);
   };
@@ -252,8 +252,30 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
+    if(typeof iterator !== 'undefined') {
+      for(var i = 0; i < collection.length; i++) {
+        if(!iterator(collection[i])) {
+          return false;
+        }
+      }
+      return true;
+    }
+    for(var i = 0; i < collection.length; i++) {
+      if(!(collection[i])) {
+        return false;
+      }
+    }
+    return true;
     // TIP: Try re-using reduce() here.
-  };
+  //   return _.reduce(collection, function(test){
+  //     for(var i = 0; i < collection.length; i++) {
+  //       if (test === iterator(collection)) {
+  //       return true;
+  //       }
+  //     }
+  //     return false;
+  //   }, false)
+   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
