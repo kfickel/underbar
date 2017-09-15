@@ -333,6 +333,20 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    var array = arguments
+    var emptyString = new Boolean('');
+    for(var i = 0; i < array.length; i++) {
+      for(var key in array[i]) {
+        if(typeof obj[key] === "undefined") {
+          if(Boolean(array[i][key]) === false) {
+            obj[key] = array[i][key];
+          } else {
+            obj[key] = array[i][key];
+          }
+        }
+      }
+    }
+    return obj;
   };
 
 
