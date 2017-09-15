@@ -255,16 +255,20 @@
     if(typeof iterator !== 'undefined') {
       for(var i = 0; i < collection.length; i++) {
         if(!iterator(collection[i])) {
+          console.log('1st false');
           return false;
         }
       }
+      console.log('1st true');
       return true;
     }
     for(var i = 0; i < collection.length; i++) {
       if(!(collection[i])) {
+        console.log('false');
         return false;
       }
     }
+    console.log('true');
     return true;
     // TIP: Try re-using reduce() here.
   //   return _.reduce(collection, function(test){
@@ -281,6 +285,18 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    var trueCount = 0;
+     _.every(collection, function(test) {
+      // console.log('test: ' + test);
+      if (test) {
+        trueCount++;
+        // console.log(trueCount);
+      }
+    });
+     if(trueCount >= 1) {
+      return true;
+     }
+     return false;
   };
 
 
