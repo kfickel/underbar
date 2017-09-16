@@ -468,6 +468,21 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var arrayCopy = array.slice(0, array.length);
+    var shuffle = [];
+    while(shuffle.length < arrayCopy.length){
+      var randomIndex = Math.floor(Math.random() * arrayCopy.length);
+      var equal = false;
+      for(var i = 0; i < arrayCopy.length; i++){
+        if(arrayCopy[randomIndex] === shuffle[i]){
+          equal = true;
+        }
+      }
+      if(!equal){
+        shuffle.push(arrayCopy[randomIndex]);
+      }
+    }
+    return shuffle;
   };
 
 
