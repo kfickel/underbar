@@ -390,50 +390,19 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var alreadyCalled = false;
-    var result;
-    var array = [JSON.stringify(arguments)];
+    //create a variable to store arguments
+    var storeArgs = {};
 
     return function() {
-      if(!alreadyCalled) {
-        //console.log(array[0]);
-        result = func.apply(this, arguments);
-        alreadyCalled = true;
-        return result;
-      } else if (alreadyCalled) {
-        for(var i = 0; i < array.length; i++) {
-          if(array[i] === arguments);
-          console.log(array[i]);
-          return result;
-        }
-        result = func.apply(this, arguments);
-        return result;
-        console.log(result);
-        //console.log(arguments);
+      var key = JSON.stringify(arguments);
+      if (storeArgs[key]) {
+        return storeArgs[key];
+      } else {
+        var val = func.apply(this, arguments);
+        storeArgs[key] = val;
+        return val;
       }
     }
-    // var calledOnce = false;
-    // var storedArg = [];
-    // //storedArg.push(JSON.stringify(arguments[0]));
-    // if(!calledOnce) {
-    //   //calledOnce = true;
-    //   for(var i = 0; i < arguments.length; i++) {
-    //     for(var j = 0; j < storedArg.length; j++) {
-    //       if(JSON.stringify(arguments[i]) === storedArg[j]) {
-    //         console.log('h ' + storedArg[j]);
-    //         return function() {
-    //           if(!calledOnce){
-    //             calledOnce = true;
-    //           }
-    //           return storedArg[j];
-    //         }
-    //       }
-    //     }
-    //     storedArg.push(JSON.stringify(arguments[i]));
-    //     console.log(JSON.stringify(arguments[i]));
-    //     return arguments[i];
-    //   }
-    // }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
