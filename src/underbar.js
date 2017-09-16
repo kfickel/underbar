@@ -333,7 +333,7 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-    var array = arguments;
+    var array = Array.prototype.slice.call(arguments);
     var emptyString = new Boolean('');
     for(var i = 0; i < array.length; i++) {
       for(var key in array[i]) {
