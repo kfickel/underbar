@@ -333,7 +333,7 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-    var array = arguments
+    var array = arguments;
     var emptyString = new Boolean('');
     for(var i = 0; i < array.length; i++) {
       for(var key in array[i]) {
@@ -372,7 +372,7 @@
     return function() {
       if (!alreadyCalled) {
         // TIP: .apply(this, arguments) is the standard way to pass on all of the
-        // infromation from one function call to another.
+        // information from one function call to another.
         result = func.apply(this, arguments);
         alreadyCalled = true;
       }
@@ -390,6 +390,50 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var alreadyCalled = false;
+    var result;
+    var array = [JSON.stringify(arguments)];
+
+    return function() {
+      if(!alreadyCalled) {
+        //console.log(array[0]);
+        result = func.apply(this, arguments);
+        alreadyCalled = true;
+        return result;
+      } else if (alreadyCalled) {
+        for(var i = 0; i < array.length; i++) {
+          if(array[i] === arguments);
+          console.log(array[i]);
+          return result;
+        }
+        result = func.apply(this, arguments);
+        return result;
+        console.log(result);
+        //console.log(arguments);
+      }
+    }
+    // var calledOnce = false;
+    // var storedArg = [];
+    // //storedArg.push(JSON.stringify(arguments[0]));
+    // if(!calledOnce) {
+    //   //calledOnce = true;
+    //   for(var i = 0; i < arguments.length; i++) {
+    //     for(var j = 0; j < storedArg.length; j++) {
+    //       if(JSON.stringify(arguments[i]) === storedArg[j]) {
+    //         console.log('h ' + storedArg[j]);
+    //         return function() {
+    //           if(!calledOnce){
+    //             calledOnce = true;
+    //           }
+    //           return storedArg[j];
+    //         }
+    //       }
+    //     }
+    //     storedArg.push(JSON.stringify(arguments[i]));
+    //     console.log(JSON.stringify(arguments[i]));
+    //     return arguments[i];
+    //   }
+    // }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -414,6 +458,9 @@
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
   };
+
+
+  //END OF PART 2
 
 
   /**
