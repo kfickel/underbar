@@ -322,9 +322,10 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-    for(var i = 0; i < arguments.length; i++) {
-      for(var key in arguments[i]) {
-        obj[key] = arguments[i][key];
+    var array = Array.prototype.slice.call(arguments);
+    for(var i = 0; i < array.length; i++) {
+      for(var key in array[i]) {
+        obj[key] = array[i][key];
       }
     }
     return obj;
@@ -334,11 +335,10 @@
   // exists in obj
   _.defaults = function(obj) {
     var array = Array.prototype.slice.call(arguments);
-    var emptyString = new Boolean('');
     for(var i = 0; i < array.length; i++) {
       for(var key in array[i]) {
-        if(typeof obj[key] === "undefined") {
-          if(Boolean(array[i][key]) === false) {
+        if(obj[key] === undefined) {
+          if(!Boolean(array[i][key])) {
             obj[key] = array[i][key];
           } else {
             obj[key] = array[i][key];
